@@ -16,6 +16,7 @@ function trueOrFalse (input, yes, no) {
 }
 var checkState = state => decodeURIComponent(state) == `discord_login_test_${process.env.STATE}`;
 const server = http.createServer(async (req, res) => {
+    try {
     var parsed = url.parse(req.url, true);
     if (parsed.pathname == '/') {
         fs.readFile('./logout.html', 'utf8', (err, data) => {
@@ -96,6 +97,31 @@ const server = http.createServer(async (req, res) => {
                 res.end(data);
             }
         });
+    } else {
+        fs.readFile('./404.html', 'utf8', (err, data) => {
+            if (err) {
+                res.writeHead(404);
+                res.end();
+            } else {
+                res.writeHead(200, {
+                    'content-type': 'text/html'
+                });
+                res.end(data);
+            }
+        });
     }
+} catch (e) {
+    fs.readFile('./500.html', 'utf8', (err, data) => {
+        if (err) {
+            res.writeHead(404);
+            res.end();
+        } else {
+            res.writeHead(200, {
+                'content-type': 'text/html'
+            });
+            res.end(data);
+        }
+    });
+}
 });
 server.listen(5000);

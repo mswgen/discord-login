@@ -20,3 +20,9 @@ body {
 #profileLabel {
     height: 20px;
 }
+#error_404 {
+    text-align: center;
+}
+#error_500 {
+    text-align: center;
+}
