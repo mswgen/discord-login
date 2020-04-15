@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="디스코드 로그인 테스트">
+        <meta name="description" content="디스코드 oauth2 로그인 테스트 페이지">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+        <title>디스코드 로그인(로그인 상태)</title>
+    </head>
+    <body>
+        <div id='grid'>
+            <a href="#userinfo_title">본문 바로가기</a>
+            <div></div>
+            <img src='!!!!!!avatar!!!!!!' id='profileLabel'>
+            <p id='userLabel'>!!!allTag!!!</p>
+            <form action="/" id='logoutForm'>
+                <input type="submit" value="로그아웃" id='logoutBtn'>
+            </form>
+        </div>
+        <h2 id='userinfo_title'>디스코드 유저 정보</h2>
+        <h4>닉네임</h4>
+        <div id='nick'>
+            <span id='username'>!!!nickname!!!</span>
+            <span id='tag'>#!!!tag!!!</span>
+        </div>
+        <h4>유저 id</h4>
+        <p id='id'>!!!id!!!</p>
+        <h4>프로필</h4>
+        <img src='!!!!!!avatar!!!!!!'>
+        <h4>등록된 이메일</h4>
+        <p id=email>!!!email!!!</p>
+        <h4>계정 지역</h4>
+        <p id='locale'>!!!locale!!!</p>
+        <h4>2단계 인증 사용 여부</h4>
+        <p id='mfa'>!!!mfa!!!</p>
+        <h4>이메일 인증 여부</h4>
+        <p id='email_verify'>!!!email_verify!!!</p>
+    </body>
+</html>

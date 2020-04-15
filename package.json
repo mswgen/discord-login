@@ -1,0 +1,20 @@
+{
+    "name": "discordlogin",
+    "description": "discord oauth login test",
+    "dependencies": {
+        "dotenv": "8.2.0",
+        "axios": "0.19.2"
+    },
+    "main": "main.js",
+    "scripts": {
+        "start": "node main.js"
+    },
+    "engines": {
+        "node": "12.x"
+    },
+    "keywords": [
+        "discord_login_test",
+        "oauth2",
+        "login_test"
+    ]
+}

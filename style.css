@@ -1,0 +1,22 @@
+body {
+    font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+}
+#username {
+    color: black;
+}
+#tag {
+    color: gray;
+}
+#grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    width: 100%;
+}
+#userLabel {
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+#profileLabel {
+    height: 20px;
+}
