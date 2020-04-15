@@ -1,1 +1,1 @@
-# naverLogin
+# discord-login
