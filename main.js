@@ -101,10 +101,10 @@ const server = http.createServer(async (req, res) => {
         fs.readFile('./404.html', 'utf8', (err, data) => {
             if (err) {
                 res.writeHead(404);
-                res.end();
+                res.end('Not found');
             } else {
-                res.writeHead(200, {
-                    'content-type': 'text/html'
+                res.writeHead(404, {
+                    'content-type': 'text/html; charset=utf-8'
                 });
                 res.end(data);
             }
@@ -114,10 +114,10 @@ const server = http.createServer(async (req, res) => {
     fs.readFile('./500.html', 'utf8', (err, data) => {
         if (err) {
             res.writeHead(404);
-            res.end();
+            res.end('Internal server error');
         } else {
-            res.writeHead(200, {
-                'content-type': 'text/html'
+            res.writeHead(500, {
+                'content-type': 'text/html; charset=utf-8'
             });
             res.end(data);
         }
