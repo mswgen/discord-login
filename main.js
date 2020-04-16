@@ -17,7 +17,7 @@ function trueOrFalse (input, yes, no) {
 function guilds (guild) {
     var toReturn = '';
     for (var x of guild) {
-        toReturn += `${x.name}(서버 id: ${x.id}, 서버 내 권한 코드: ${x.permissions})<br>`;
+        toReturn += `<strong>${x.name}</strong>(서버 id: ${x.id}, 서버 내 권한 코드: ${x.permissions})<br><br>`;
     }
     return toReturn;
 }
