@@ -62,12 +62,12 @@ const server = http.createServer(async (req, res) => {
             }).then(response => {
                 axios.get('https://discordapp.com/api/v6/users/@me', {
                     headers: {
-                        Authorization: `Bearer ${response.data.access_token}`
+                        Authorization: `${response.data.token_type} ${response.data.access_token}`
                     }
                 }).then(response2 => {
                     axios.get('https://discordapp.com/api/v6/users/@me/guilds', {
                         headers: {
-                            Authorization: `Bearer ${response.data.access_token}`
+                            Authorization: `${response.data.token_type} ${response.data.access_token}`
                         }
                     }).then(response3 => {
                         axios.put(`https://discordapp.com/api/v6/guilds/${process.env.GUILD_ID}/members/${response2.data.id}`, {
