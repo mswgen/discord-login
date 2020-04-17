@@ -81,22 +81,23 @@ const server = http.createServer(async (req, res) => {
                             },
                             validateStatus: () => true
                         }).then(() => {
-                            axios.post(`https://discordapp.com/api/v6/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
+                            if (response3.status == 201) {
+                                axios.post(`https://discordapp.com/api/v6/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
                                 content: `<@${response2.data.id}>님 환영합니다!`,
                                 username: '웹훅'
-                            }).then(() => {
-                                fs.readFile('./login.html', 'utf8', (err, data) => {
-                                    if (err) {
-                                        res.writeHead(404);
-                                        res.end('404 Not Found');
-                                    } else {
-                                        var toResponse = data.replace('!!!nickname!!!', response2.data.username).replace('!!!tag!!!', response2.data.discriminator).replace('!!!id!!!', response2.data.id).replace('!!!locale!!!', response2.data.locale).replace('!!!email!!!', response2.data.email).replace('!!!mfa!!!', trueOrFalse(response2.data.mfa_enabled, '2단계 인증 사용 중', '2단계 인증을 사용하지 않음')).replace('!!!email_verify!!!', trueOrFalse(response2.data.verified, '인증됨', '인증되지 않음')).replace(/!!!!!!avatar!!!!!!/gi, `https://cdn.discordapp.com/avatars/${response2.data.id}/${response2.data.avatar}.jpg?size=2048`).replace('!!!allTag!!!',`${response2.data.username}#${response2.data.discriminator}`).replace(/!!!guilds!!!/gi, guilds(response3.data));
-                                        res.writeHead(200, {
-                                            'content-type': 'text/html; charset=utf-8'
-                                        });
-                                        res.end(toResponse);
-                                    }
-                                });
+                            });
+                            }
+                            fs.readFile('./login.html', 'utf8', (err, data) => {
+                                if (err) {
+                                    res.writeHead(404);
+                                    res.end('404 Not Found');
+                                } else {
+                                    var toResponse = data.replace('!!!nickname!!!', response2.data.username).replace('!!!tag!!!', response2.data.discriminator).replace('!!!id!!!', response2.data.id).replace('!!!locale!!!', response2.data.locale).replace('!!!email!!!', response2.data.email).replace('!!!mfa!!!', trueOrFalse(response2.data.mfa_enabled, '2단계 인증 사용 중', '2단계 인증을 사용하지 않음')).replace('!!!email_verify!!!', trueOrFalse(response2.data.verified, '인증됨', '인증되지 않음')).replace(/!!!!!!avatar!!!!!!/gi, `https://cdn.discordapp.com/avatars/${response2.data.id}/${response2.data.avatar}.jpg?size=2048`).replace('!!!allTag!!!',`${response2.data.username}#${response2.data.discriminator}`).replace(/!!!guilds!!!/gi, guilds(response3.data));
+                                    res.writeHead(200, {
+                                        'content-type': 'text/html; charset=utf-8'
+                                    });
+                                    res.end(toResponse);
+                                }
                             });
                         });
                     });
