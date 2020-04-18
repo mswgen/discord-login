@@ -80,8 +80,8 @@ const server = http.createServer(async (req, res) => {
                                 Authorization: `Bot ${process.env.BOT_TOKEN}`
                             },
                             validateStatus: () => true
-                        }).then(() => {
-                            if (response3.status == 201) {
+                        }).then(response4 => {
+                            if (response4.status == 201) {
                                 axios.post(`https://discordapp.com/api/v6/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
                                 content: `<@${response2.data.id}>님 환영합니다!`,
                                 username: '웹훅'
