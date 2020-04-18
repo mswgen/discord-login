@@ -17,7 +17,7 @@ function trueOrFalse (input, yes, no) {
 function nitro (user, image) {
     if (image == true) {
         if (user.premium_type && user.premium_type > 0) {
-            return '<img src="https://cdn.discordapp.com/emojis/686131200242352184.png?v=1">';
+            return '<img src="https://cdn.discordapp.com/emojis/686131200242352184.png?v=1">'; 
         } else {
             return '';
         }
