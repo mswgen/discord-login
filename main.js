@@ -14,12 +14,40 @@ function trueOrFalse (input, yes, no) {
         return no;
     }
 }
+function nitro (user, image) {
+    if (image == true) {
+        if (user.premium_type && user.premium_type > 0) {
+            return '<img src="https://cdn.discordapp.com/emojis/686131200242352184.png?v=1">';
+        } else {
+            return '';
+        }
+    } else {
+        if (!user.premium_type || user.premium_type == 0) {
+            return '없음';
+        } else if (user.premium_type == 1) {
+            return 'Nitro Classic';
+        } else if (user.premium_type == 2) {
+            return 'Nitro';
+        }
+    }
+}
 function guilds (guild) {
     var toReturn = '';
     for (var x of guild) {
         toReturn += `<strong>${x.name}</strong>(서버 id: ${x.id}, 서버 내 권한 코드: ${x.permissions})<br><br>`;
     }
     return toReturn;
+}
+function getAvatar (user) {
+    if (user.avatar) {
+        if (user.avatar.startsWith('a_')) {
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.gif?size=2048`;
+        } else {
+            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.jpg?size=2048`;
+        }
+    } else {
+        return `https://cdn.discordapp.com/embed/avatars/${user.discriminator % 5}.png?size=2048`;
+    }
 }
 var checkState = state => decodeURIComponent(state) == `discord_login_test_${process.env.STATE}`;
 const server = http.createServer(async (req, res) => {
@@ -84,7 +112,8 @@ const server = http.createServer(async (req, res) => {
                             if (response4.status == 201) {
                                 axios.post(`https://discordapp.com/api/v6/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
                                 content: `<@${response2.data.id}>님 환영합니다!\n이 서버에 어떻게 들어오게 되었는지 궁금하다면 <@647736678815105037>님에게 디엠을 보내주세요. `,
-                                username: '웹훅'
+                                username: '웹훅',
+                                avatar_url: 'https://cdn.discordapp.com/icons/688681923698229294/2f878e92253b3249c1848596c560e83e.jpg?size=2048'
                             });
                             }
                             fs.readFile('./login.html', 'utf8', (err, data) => {
@@ -92,7 +121,19 @@ const server = http.createServer(async (req, res) => {
                                     res.writeHead(404);
                                     res.end('404 Not Found');
                                 } else {
-                                    var toResponse = data.replace('!!!nickname!!!', response2.data.username).replace('!!!tag!!!', response2.data.discriminator).replace('!!!id!!!', response2.data.id).replace('!!!locale!!!', response2.data.locale).replace('!!!email!!!', response2.data.email).replace('!!!mfa!!!', trueOrFalse(response2.data.mfa_enabled, '2단계 인증 사용 중', '2단계 인증을 사용하지 않음')).replace('!!!email_verify!!!', trueOrFalse(response2.data.verified, '인증됨', '인증되지 않음')).replace(/!!!!!!avatar!!!!!!/gi, `https://cdn.discordapp.com/avatars/${response2.data.id}/${response2.data.avatar}.jpg?size=2048`).replace('!!!allTag!!!',`${response2.data.username}#${response2.data.discriminator}`).replace(/!!!guilds!!!/gi, guilds(response3.data));
+                                    var toResponse = data
+                                        .replace('!!!nickname!!!', response2.data.username)
+                                        .replace('!!!tag!!!', response2.data.discriminator)
+                                        .replace('!!!id!!!', response2.data.id)
+                                        .replace('!!!locale!!!', response2.data.locale)
+                                        .replace('!!!email!!!', response2.data.email)
+                                        .replace('!!!mfa!!!', trueOrFalse(response2.data.mfa_enabled, '2단계 인증 사용 중', '2단계 인증을 사용하지 않음'))
+                                        .replace('!!!email_verify!!!', trueOrFalse(response2.data.verified, '인증됨', '인증되지 않음'))
+                                        .replace(/!!!!!!avatar!!!!!!/gi, getAvatar(response2.data))
+                                        .replace('!!!allTag!!!',`${response2.data.username}#${response2.data.discriminator}`)
+                                        .replace('!!!guilds!!!', guilds(response3.data))
+                                        .replace(/!!!!!!nitro_icon!!!!!!/gi, nitro(response2.data, true))
+                                        .replace(/!!!!!!nitro!!!!!!/gi, nitro(response2.data, false))
                                     res.writeHead(200, {
                                         'content-type': 'text/html; charset=utf-8'
                                     });

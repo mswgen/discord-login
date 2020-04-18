@@ -9,7 +9,7 @@ body {
 }
 #grid {
     display: grid;
-    grid-template-columns: auto 1fr auto auto auto;
+    grid-template-columns: auto 1fr auto auto auto auto;
     width: 100%;
 }
 #userLabel {
