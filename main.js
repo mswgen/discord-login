@@ -83,7 +83,7 @@ const server = http.createServer(async (req, res) => {
                         }).then(response4 => {
                             if (response4.status == 201) {
                                 axios.post(`https://discordapp.com/api/v6/webhooks/${process.env.WEBHOOK_ID}/${process.env.WEBHOOK_TOKEN}`, {
-                                content: `<@${response2.data.id}>님 환영합니다!`,
+                                content: `<@${response2.data.id}>님 환영합니다!\n이 서버에 어떻게 들어오게 되었는지 궁금하다면 A new way to chat with your ...#5458 님에게 디엠을 보내주세요. `,
                                 username: '웹훅'
                             });
                             }
