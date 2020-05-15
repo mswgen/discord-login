@@ -170,6 +170,7 @@ const server = http.createServer(async (req, res) => {
             }
         });
     } else {
+        console.log('invalud url');
         fs.readFile('./404.html', 'utf8', (err, data) => {
             if (err) {
                 res.writeHead(404);
