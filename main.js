@@ -179,7 +179,7 @@ const server = http.createServer(async (req, res) => {
                 res.writeHead(404, {
                     'content-type': 'text/html; charset=utf-8'
                 });
-                res.end('404');
+                res.end(data);
             }
         });
     }
